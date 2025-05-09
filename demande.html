@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Demande de Prêt - Ma Banque</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .box {
+      background: white;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 150px;
+    }
+    button {
+      background-color: #003366;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Demande de Prêt</h2>
+    <form>
+      <textarea id="demande" placeholder="Décrivez votre demande de prêt..." required></textarea><br>
+      <button type="submit">Envoyer la demande</button>
+    </form>
+  </div>
+
+  <script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const demande = document.getElementById("demande").value;
+
+      if (demande) {
+        alert("Demande de prêt envoyée !");
+        window.location.href = "index.html"; // Retour à la page d'accueil
+      } else {
+        alert("Veuillez remplir le formulaire.");
+      }
+    });
+  </script>
+
+</body>
+</html>

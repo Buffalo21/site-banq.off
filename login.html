@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ma Banque - Tableau de bord</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .logout {
+      background-color: #cc0000;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .logout:hover {
+      background-color: #a10000;
+    }
+
+    .banner {
+      background: url("images/logo-banque.png") center/cover no-repeat;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .banner h2 {
+      font-size: 32px;
+    }
+
+    .container {
+      padding: 30px;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .carte {
+      background: linear-gradient(to right, #003366, #0055aa);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+    }
+
+    .carte p {
+      margin: 5px 0;
+    }
+
+    .operations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .operations a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #0055aa;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      width: 220px;
+      transition: background 0.3s;
+    }
+
+    .operations a img {
+      height: 20px;
+    }
+
+    .operations a:hover {
+      background-color: #003f80;
+    }
+  </style>
+  <script>
+    function deconnexion() {
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>Ma Banque</h1>
+    <button class="logout" onclick="deconnexion()">Déconnexion</button>
+  </header>
+
+  <div class="banner">
+    <h2>Bienvenue Mathieu Dabik Bloch</h2>
+  </div>
+
+  <div class="container">
+    <div class="carte">
+      <p><strong>Nom :</strong> Mathieu Dabik Bloch</p>
+      <p><strong>RIB :</strong> FR76 3000 6000 0112 3456 7890 189</p>
+      <p><strong>Solde :</strong> 450 000 000 €</p>
+      <p><strong>Statut :</strong> Actif</p>
+    </div>
+
+    <div class="operations">
+      <a href="solde.html"><img src="images/icone-solde.jpg" alt=""> Voir le solde</a>
+      <a href="virement.html"><img src="images/icone-virement.png" alt=""> Effectuer un virement</a>
+      <a href="demande.html"><img src="images/icone-pret.png" alt=""> Demande de prêt</a>
+      <a href="services.html"><img src="images/icone-service.png" alt=""> Services</a>
+      <a href="contact.html"><img src="images/icone-contact.jpeg" alt=""> Contact</a>
+    </div>
+  </div>
+
+</body>
+</html>

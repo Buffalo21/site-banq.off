@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ma Banque - Accueil</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    .espace-client a {
+      color: white;
+      text-decoration: none;
+      background-color: #0055aa;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background-image: url('images/mikhail-nilov-7682204.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      color: white;
+    }
+
+    /* Assombrir légèrement l’image pour lisibilité */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    .hero h1, .hero p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="images/logo-banque.png" alt="Logo Ma Banque">
+    </div>
+    <div class="espace-client">
+      <a href="acceuil.html">Espace Client</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Bienvenue sur le site officiel de Ma Banque</h1>
+    <p>Une solution fiable, sécurisée et innovante pour gérer vos finances.</p>
+  </section>
+
+</body>
+</html>

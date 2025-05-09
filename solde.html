@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Solde - Ma Banque</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      text-align: center;
+      padding-top: 50px;
+      margin: 0;
+    }
+    .box {
+      background: white;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    h2 {
+      color: #003366;
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+    .card {
+      background-image: url('images/téléchargement.jpg');
+      background-size: cover;
+      background-position: center;
+      width: 300px;
+      height: 170px;
+      border-radius: 15px;
+      margin-top: 20px;
+      display: inline-block;
+    }
+    .card-info {
+      text-align: left;
+      font-size: 16px;
+      color: #fff;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+    }
+    .card-info p {
+      margin: 5px 0;
+    }
+
+    /* Animation de l'apparition */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Bienvenue ! Voici le solde de votre compte</h2>
+    <p>450.000.000 €</p>
+
+    <!-- Carte bancaire -->
+    <div class="card">
+      <div class="card-info">
+        <p><strong>Titulaire:</strong> Mathieu Bloch</p>
+        <p><strong>Numéro de carte:</strong> 1234 5678 9012 3456</p>
+        <p><strong>RIB:</strong> FR76 1234 5678 9101 1121 3141 516</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

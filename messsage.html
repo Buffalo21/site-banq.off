@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Messages reçus</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #004080;
+      text-align: center;
+    }
+
+    .message {
+      background-color: white;
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .message p {
+      font-size: 16px;
+    }
+
+    .message .header {
+      font-weight: bold;
+    }
+
+    .reply-section {
+      margin-top: 20px;
+    }
+
+    .reply-button {
+      background-color: #004080;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .reply-button:hover {
+      background-color: #003366;
+    }
+
+    .reply-form {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .reply-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .submit-reply {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .submit-reply:hover {
+      background-color: #218838;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Messages reçus</h1>
+
+  <div id="messages-container"></div>
+
+  <script>
+    // Fonction pour afficher les messages stockés
+    function afficherMessages() {
+      const messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+      const container = document.getElementById('messages-container');
+
+      if (messages.length === 0) {
+        container.innerHTML = '<p>Aucun message pour le moment.</p>';
+      } else {
+        messages.forEach((message, index) => {
+          const messageDiv = document.createElement('div');
+          messageDiv.classList.add('message');
+          messageDiv.innerHTML = `
+            <div class="header">Message #${index + 1}</div>
+            <p><strong>Nom :</strong> ${message.nom}</p>
+            <p><strong>Email :</strong> ${message.email}</p>
+            <p><strong>Adresse :</strong> ${message.adresse}</p>
+            <p><strong>Message :</strong> ${message.message}</p>
+            <p><strong>Date :</strong> ${message.date}</p>
+            <div class="reply-section">
+              <button class="reply-button" onclick="toggleReplyForm(${index})">Répondre</button>
+              <div class="reply-form" id="reply-form-${index}">
+                <textarea id="reply-text-${index}" rows="4" placeholder="Votre réponse..."></textarea>
+                <br>
+                <button class="submit-reply" onclick="envoyerReponse(${index})">Envoyer la réponse</button>
+              </div>
+            </div>
+          `;
+          container.appendChild(messageDiv);
+        });
+      }
+    }
+
+    // Fonction pour afficher ou masquer le formulaire de réponse
+    function toggleReplyForm(index) {
+      const replyForm = document.getElementById(reply-form-${index});
+      replyForm.style.display = (replyForm.style.display === "block") ? "none" : "block";
+    }
+
+    // Fonction pour enregistrer et afficher la réponse
+    function envoyerReponse(index) {
+      const responseText = document.getElementById(reply-text-${index}).value;
+      if (responseText.trim() === "") {
+        alert("Veuillez rédiger une réponse avant d'envoyer.");
+        return;
+      }
+
+      const messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+      // Ajout de la réponse dans le message
+      messages[index].reponse = responseText;
+
+      // Mise à jour de l'objet dans localStorage
+      localStorage.setItem('messages', JSON.stringify(messages));
+
+      // Réafficher les messages avec la nouvelle réponse
+      afficherMessages();
+
+      // Alerte de confirmation
+      alert("Réponse envoyée avec succès.");
+    }
+
+    // Appel de la fonction au chargement de la page
+    window.onload = afficherMessages;
+  </script>
+
+</body>
+</html>

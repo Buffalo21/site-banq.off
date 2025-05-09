@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Messages Reçus</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #004080;
+      text-align: center;
+    }
+
+    .messages-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .message {
+      background-color: #f9f9f9;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .message h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .message p {
+      margin: 10px 0;
+      color: #666;
+    }
+
+    .message small {
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Messages Reçus</h1>
+
+  <div class="messages-container" id="messagesContainer">
+    <!-- Les messages seront affichés ici -->
+  </div>
+
+  <script>
+    // Récupérer les messages depuis le localStorage
+    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    // Sélectionner l'élément où les messages seront affichés
+    const messagesContainer = document.getElementById('messagesContainer');
+
+    // Vérifier s'il y a des messages à afficher
+    if (messages.length === 0) {
+      messagesContainer.innerHTML = "<p>Aucun message reçu pour le moment.</p>";
+    } else {
+      // Afficher les messages un par un
+      messages.forEach(message => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.innerHTML = `
+          <h3>${message.nom}</h3>
+          <p><strong>Email :</strong> ${message.email}</p>
+          <p><strong>Adresse :</strong> ${message.adresse}</p>
+          <p><strong>Message :</strong> ${message.message}</p>
+          <small>Envoyé le : ${message.date}</small>
+        `;
+        messagesContainer.appendChild(messageElement);
+      });
+    }
+  </script>
+
+</body>
+</html>

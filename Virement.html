@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Virement Bancaire</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      color: #004080;
+      text-align: center;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #004080;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #003366;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #historique .virement {
+      background-color: #ffffff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-left: 5px solid #004080;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    #historique p {
+      margin: 5px 0;
+    }
+
+    .btn-actions {
+      margin-top: 10px;
+    }
+
+    .btn-valider {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      margin-right: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-annuler {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-valider:hover {
+      background-color: #218838;
+    }
+
+    .btn-annuler:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Effectuer un Virement</h1>
+
+  <div class="form-container">
+    <form id="virement-form">
+      <div class="form-group">
+        <label for="destinataire">Nom du destinataire :</label>
+        <input type="text" id="destinataire" required>
+      </div>
+
+      <div class="form-group">
+        <label for="rib">RIB du destinataire :</label>
+        <input type="text" id="rib" required>
+      </div>
+
+      <div class="form-group">
+        <label for="montant">Montant (€) :</label>
+        <input type="number" id="montant" required min="1">
+      </div>
+
+      <button type="submit">Valider le virement</button>
+    </form>
+
+    <div class="success" id="success-message" style="display: none;">
+      Virement enregistré avec succès (statut : en cours).
+    </div>
+  </div>
+
+  <div class="form-container">
+    <h2>Historique des virements</h2>
+    <div id="historique"></div>
+  </div>
+
+  <script>
+    document.getElementById('virement-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const destinataire = document.getElementById('destinataire').value;
+      const rib = document.getElementById('rib').value;
+      const montant = document.getElementById('montant').value;
+
+      const virement = {
+        destinataire,
+        rib,
+        montant,
+        statut: "En cours",
+        date: new Date().toLocaleString()
+      };
+
+      const virements = JSON.parse(localStorage.getItem('virements')) || [];
+      virements.push(virement);
+      localStorage.setItem('virements', JSON.stringify(virements));
+
+      document.getElementById('success-message').style.display = 'block';
+      document.getElementById('virement-form').reset();
+
+      afficherHistorique();
+    });
+
+    function afficherHistorique() {
+      const historique = document.getElementById('historique');
+      const virements = JSON.parse(localStorage.getItem('virements')) || [];
+
+      historique.innerHTML = '';
+
+      virements.forEach((virement, index) => {
+        const bloc = document.createElement('div');
+        bloc.className = 'virement';
+        bloc.innerHTML = `
+          <p><strong>Destinataire :</strong> ${virement.destinataire}</p>
+          <p><strong>RIB :</strong> ${virement.rib}</p>
+          <p><strong>Montant :</strong> ${virement.montant} €</p>
+          <p><strong>Date :</strong> ${virement.date}</p>
+          <p><strong>Statut :</strong> ${virement.statut}</p>
+          <div class="btn-actions">
+            <button class="btn-valider" onclick="validerVirement(${index})">Valider</button>
+            <button class="btn-annuler" onclick="annulerVirement(${index})">Annuler</button>
+          </div>
+        `;
+        historique.appendChild(bloc);
+      });
+    }
+
+    function validerVirement(index) {
+      const virements = JSON.parse(localStorage.getItem('virements')) || [];
+      virements[index].statut = 'Validé';
+      localStorage.setItem('virements', JSON.stringify(virements));
+      afficherHistorique();
+    }
+
+    function annulerVirement(index) {
+      const virements = JSON.parse(localStorage.getItem('virements')) || [];
+      virements[index].statut = 'Annulé';
+      localStorage.setItem('virements', JSON.stringify(virements));
+      afficherHistorique();
+    }
+
+    document.addEventListener('DOMContentLoaded', afficherHistorique);
+  </script>
+
+</body>
+</html>
